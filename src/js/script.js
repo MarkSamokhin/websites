@@ -56,17 +56,25 @@ $(document).ready(function(){
     function valideForms(form) {
         $(form).validate({
             rules: {
-                name:"required",
-                phone:"required",
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                phone: "required",
                 email: {
                     required: true,
+                    email: true
                 }
             },
             messages: {
-                name: "Введите ваше Имя",
+                name: {
+                    required: "Пожалуйста, введите свое имя",
+                    minlength: jQuery.validator.format("Введите {0} символа!")
+                  },
+                phone: "Пожалуйста, введите свой номер телефона",
                 email: {
-                  required: "Введите вашу почту",
-                  email: "Заполните поле с почтой в таком формате name@domain.com"
+                  required: "Пожалуйста, введите свою почту",
+                  email: "Неправильно введен адрес почты"
                 }
             }
         });
@@ -94,7 +102,6 @@ $(document).ready(function(){
         });
         return false;
     });
-
     //smoth scroll and pageup
     $(window).scroll(function() {
         if ($(this).scrollTop() > 1600) {
